@@ -1,5 +1,37 @@
 # Quick Reference Guide - GenAI Scout Lite
 
+## Vercel Deployment (Recommended)
+
+### Option 1: GitHub Integration (Easiest)
+1. Push your code to GitHub (see below)
+2. Go to [vercel.com](https://vercel.com) and sign up
+3. Click "Import Project" and select your GitHub repo
+4. Add environment variable: `GROQ_API_KEY=your_key_here`
+5. Deploy! 🚀
+
+### Option 2: Vercel CLI
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login and deploy
+vercel login
+vercel
+
+# Add environment variables
+vercel env add GROQ_API_KEY
+vercel env add NODE_ENV production
+
+# Redeploy with env vars
+vercel --prod
+```
+
+### Option 3: npm Script
+```bash
+# Use built-in deployment script
+npm run deploy:vercel
+```
+
 ## GitHub Upload (First Time)
 
 ```powershell
@@ -98,24 +130,51 @@ sudo tail -f /var/log/nginx/error.log
 
 ## Environment Variables
 
-Create `.env.production`:
-
+### For Vercel:
+Set in Vercel dashboard or CLI:
 ```env
 GROQ_API_KEY=your_groq_api_key_here
-NODE_ENV=production
-PORT=3000
 ```
 
-## Security Group Settings (AWS)
+### For Local Development:
+Create `.env.local`:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+NODE_ENV=development
+```
 
-- SSH (22): Your IP only
-- HTTP (80): 0.0.0.0/0
-- HTTPS (443): 0.0.0.0/0
-- Custom TCP (3000): 0.0.0.0/0 (for development only)
+## Alternative: AWS EC2 Deployment
 
-## Important Security Notes
+Only use if you need custom infrastructure or have specific requirements.
 
-⚠️ **Never commit API keys to git**
-- Use `.env.example` for documentation
-- Keep actual keys in `.env.production` on server only
-- Add `.env*` to `.gitignore` (already included)
+### Quick EC2 Setup:
+```bash
+# 1. Update system
+sudo apt update && sudo apt upgrade -y
+
+# 2. Install Node.js 18
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# 3. Install PM2 and Nginx
+sudo npm install -g pm2
+sudo apt install -y nginx git
+
+# 4. Clone and setup project
+git clone https://github.com/xorjun/genai-scout-lite.git
+cd genai-scout-lite
+npm install
+npm run build
+
+# 5. Start with PM2
+pm2 start npm --name "genai-scout-lite" -- start
+pm2 save
+pm2 startup
+```
+
+## Important Notes
+
+⚠️ **Firebase Removed**: This project no longer uses Firebase
+✅ **Vercel Optimized**: Configured for best performance on Vercel
+🔒 **Security**: Never commit API keys to git
+📱 **Mobile Ready**: Responsive design works on all devices

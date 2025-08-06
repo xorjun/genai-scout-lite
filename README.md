@@ -41,7 +41,7 @@ A simplified technology scouting assistant powered by generative AI. This applic
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/genai-scout-lite.git
+git clone https://github.com/xorjun/genai-scout-lite.git
 cd genai-scout-lite
 ```
 
@@ -112,21 +112,45 @@ npm run dev
 
 ## Deployment
 
-See the comprehensive [Deployment Guide](./DEPLOYMENT_GUIDE.md) for detailed instructions on:
-- Uploading to GitHub
-- Setting up AWS EC2 Ubuntu server
+### Vercel (Recommended)
+
+The easiest way to deploy is using Vercel:
+
+1. **Fork this repository** on GitHub
+2. **Sign up for Vercel** at [vercel.com](https://vercel.com)
+3. **Connect your GitHub account** to Vercel
+4. **Import your repository** and Vercel will auto-detect Next.js
+5. **Add environment variables**:
+   - `GROQ_API_KEY`: Your Groq API key
+6. **Deploy** - Vercel will automatically build and deploy
+
+#### Manual Vercel Deployment
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy
+vercel
+
+# Set environment variables
+vercel env add GROQ_API_KEY
+```
+
+### Alternative: AWS EC2 Deployment
+
+For AWS EC2 deployment, see the comprehensive [Deployment Guide](./DEPLOYMENT_GUIDE.md) for detailed instructions on:
+- Setting up Ubuntu EC2 server
 - Configuring Nginx and SSL
 - Process management with PM2
 - Monitoring and maintenance
 
-### Quick Deployment Commands
-For experienced users, see [Quick Reference](./QUICK_REFERENCE.md) for essential commands.
+### Quick Commands Reference
 
-### Vercel (Alternative)
-```bash
-npm run build
-vercel --prod
-```
+For experienced users, see [Quick Reference](./QUICK_REFERENCE.md) for essential commands.
 
 ## File Structure
 

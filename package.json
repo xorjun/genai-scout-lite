@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:vercel": "node scripts/deploy-vercel.js",
+    "setup:env": "cp .env.example .env.local"
   },
   "dependencies": {
     "groq-sdk": "^0.29.0",
